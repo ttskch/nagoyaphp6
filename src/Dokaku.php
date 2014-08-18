@@ -1,30 +1,30 @@
 <?php
-/**
- * This file is part of the Nagoya.Dokaku
- *
- * @license http://opensource.org/licenses/bsd-license.php BSD
- */
+
 namespace Nagoya\Dokaku;
 
 class Dokaku
 {
     private $parser;
-    private $assignor;
-    private $applications;
+    private $printer;
+    private $booker;
 
-    public function __construct(InputParser $parser, Assignor $assignor)
+    public function __construct(InputParser $parser, OutputPrinter $printer, Booker $booker)
     {
         $this->parser = $parser;
-        $this->assignor = $assignor;
+        $this->printer = $printer;
+        $this->booker = $booker;
     }
 
-    public function input($inputString)
+    public function process($inputString)
     {
-        $this->applications = $this->parser->parse($inputString);
-    }
+        $applications = $this->parser->parse($inputString);
 
-    public function process()
-    {
-        return $this->assignor->assign($this->applications);
+        foreach ($applications as $application) {
+            $this->booker->book($application);
+        }
+
+        $elected = $this->booker->elect();
+
+        return $this->printer->dump($elected);
     }
 }

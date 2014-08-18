@@ -1,10 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: takashi
- * Date: 2014/08/17
- * Time: 15:30
- */
 
 namespace Nagoya\Dokaku;
 
@@ -19,24 +13,28 @@ class InputParser
         $inputs = explode('|', $inputString);
         foreach ($inputs as $input) {
             $input = explode('_', $input);
+
+            // 形式チェック.
             if (count($input) < 2) {
                 throw new RuntimeException('invalid input');
             }
             if (!preg_match('/[1-5]{5}/', $input[1])) {
-                var_dump($input);
                 throw new RuntimeException('invalid input');
             }
 
             $id = intval($input[0]);
-            $hopes = str_split($input[1]);
-            foreach ($hopes as $key => $hope) {
-                $hopes[$key] = intval($hope);
+            $priorities = str_split($input[1]);
+
+            // 希望曜日の重複チェック.
+            if (count(array_unique($priorities)) !== 5) {
+                throw new RuntimeException('invalid input');
             }
 
-            $applications[] = [
-                'id' => $id,
-                'hopes' => $hopes,
-            ];
+            foreach ($priorities as $key => $priority) {
+                $priorities[$key] = intval($priority);
+            }
+
+            $applications[] = new Application($id, $priorities);
         }
 
         return $applications;

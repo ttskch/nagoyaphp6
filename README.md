@@ -1,48 +1,8 @@
-PHP.Skeleton
-=======
-A standard PHP project skeleton
----------------------------------------------
-This project was created in order to provide project skeleton to start new PHP project.
-Various config files are ready for continuous integration.
+# Hands-on of Nagoya.php vol.6
 
- * phpunit.xml for [phpunit](http://phpunit.de/manual/current/en/index.html)
- * build.xml for [Apache Ant](http://ant.apache.org/) / [Jenkins](http://jenkins-ci.org/)
- * .travis.yml for [Travis CI](https://travis-ci.org/)
+http://nagoyaphp.doorkeeper.jp/events/13498
 
-Requirements
-------------
- * PHP 5.3+
+## 内容
 
-Getting started
----------------
-
-### Create project
-```
- $ composer create-project php/skeleton {Vendor.Package}
- $ cd {Vendor.Package}
- $ composer dump-autoload
- $ phpunit
-```
-
-
-Using ant
----------
-
-### Prepare
-
-Install QA(Quality Assurance) tools
-```bash
- $ ant require
-```
-Export composer bin path 
-```bash
-export PATH="$HOME/.composer/vendor/bin:$PATH"
-```
-
-## ant
-```bash
- $ ant
- 
- $ ant test
- $ ant report
-```
+* [レッスンは何曜日？ ～ 横へな 2014.5.9 問題](http://d.hatena.ne.jp/torazuka/20140509/yhpg) を解いてみる
+* 所要時間：約 2 時間
